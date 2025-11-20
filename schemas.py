@@ -1,48 +1,63 @@
 """
 Database Schemas
 
-Define your MongoDB collection schemas here using Pydantic models.
-These schemas are used for data validation in your application.
-
-Each Pydantic model represents a collection in your database.
-Model name is converted to lowercase for the collection name:
-- User -> "user" collection
-- Product -> "product" collection
-- BlogPost -> "blogs" collection
+Pydantic models that represent MongoDB collections. Each class name becomes
+a collection name in lowercase.
 """
 
-from pydantic import BaseModel, Field
-from typing import Optional
+from pydantic import BaseModel, Field, EmailStr
+from typing import Optional, List
+from datetime import datetime
 
-# Example schemas (replace with your own):
+class Organizer(BaseModel):
+    name: str = Field(..., description="Organization or club name")
+    contact_email: Optional[EmailStr] = Field(None, description="Primary contact email")
 
+class Event(BaseModel):
+    external_id: Optional[str] = Field(None, description="ID from Smoothcomp if available")
+    title: str
+    slug: Optional[str] = None
+    description: Optional[str] = None
+    start_date: Optional[datetime] = None
+    end_date: Optional[datetime] = None
+    location: Optional[str] = None
+    rule_set: Optional[str] = Field(None, description="Ruleset or style (e.g., Freestyle, Greco)")
+    organizer: Optional[Organizer] = None
+    published: bool = True
+
+class Participant(BaseModel):
+    first_name: str
+    last_name: str
+    email: EmailStr
+    birth_year: Optional[int] = Field(None, ge=1900, le=2100)
+    weight_class: Optional[str] = None
+    club: Optional[str] = None
+    country: Optional[str] = None
+
+class Registration(BaseModel):
+    event_id: str = Field(..., description="Local Event document id (or slug)")
+    participant: Participant
+    division: Optional[str] = None
+    belt: Optional[str] = None
+    status: str = Field("pending", description="pending | confirmed | rejected")
+    external_ref: Optional[str] = Field(None, description="External Smoothcomp registration id if synced")
+
+class ChatTranscript(BaseModel):
+    user_message: str
+    response: str
+    context: Optional[dict] = None
+
+# Example from template retained for compatibility
 class User(BaseModel):
-    """
-    Users collection schema
-    Collection name: "user" (lowercase of class name)
-    """
-    name: str = Field(..., description="Full name")
-    email: str = Field(..., description="Email address")
-    address: str = Field(..., description="Address")
-    age: Optional[int] = Field(None, ge=0, le=120, description="Age in years")
-    is_active: bool = Field(True, description="Whether user is active")
+    name: str
+    email: str
+    address: str
+    age: Optional[int] = None
+    is_active: bool = True
 
 class Product(BaseModel):
-    """
-    Products collection schema
-    Collection name: "product" (lowercase of class name)
-    """
-    title: str = Field(..., description="Product title")
-    description: Optional[str] = Field(None, description="Product description")
-    price: float = Field(..., ge=0, description="Price in dollars")
-    category: str = Field(..., description="Product category")
-    in_stock: bool = Field(True, description="Whether product is in stock")
-
-# Add your own schemas here:
-# --------------------------------------------------
-
-# Note: The Flames database viewer will automatically:
-# 1. Read these schemas from GET /schema endpoint
-# 2. Use them for document validation when creating/editing
-# 3. Handle all database operations (CRUD) directly
-# 4. You don't need to create any database endpoints!
+    title: str
+    description: Optional[str] = None
+    price: float
+    category: str
+    in_stock: bool = True
