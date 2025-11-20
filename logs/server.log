@@ -1,15 +1,15 @@
 INFO:     Will watch for changes in these directories: ['/home/workspace']
 INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
-INFO:     Started reloader process [205] using StatReload
-INFO:     Started server process [207]
+INFO:     Started reloader process [294] using StatReload
+INFO:     Started server process [296]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
-INFO:     172.20.0.1:40748 - "HEAD / HTTP/1.1" 405 Method Not Allowed
-INFO:     172.20.0.1:40760 - "GET /api/events HTTP/1.1" 200 OK
-INFO:     172.20.0.1:40760 - "GET /api/events HTTP/1.1" 200 OK
-INFO:     172.20.0.1:40774 - "GET /api/smoothcomp/events?q= HTTP/1.1" 404 Not Found
-INFO:     172.20.0.1:40760 - "GET /api/smoothcomp/events?q= HTTP/1.1" 404 Not Found
-INFO:     172.20.0.1:52798 - "GET /api/events HTTP/1.1" 200 OK
-INFO:     172.20.0.1:52798 - "GET /api/events HTTP/1.1" 200 OK
-INFO:     172.20.0.1:52790 - "GET /api/smoothcomp/events?q= HTTP/1.1" 404 Not Found
-INFO:     172.20.0.1:52798 - "GET /api/smoothcomp/events?q= HTTP/1.1" 404 Not Found
+INFO:     172.20.0.1:45744 - "HEAD / HTTP/1.1" 405 Method Not Allowed
+INFO:     172.20.0.1:39586 - "GET /api/smoothcomp/events?q= HTTP/1.1" 404 Not Found
+INFO:     172.20.0.1:39590 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     172.20.0.1:39590 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     172.20.0.1:39586 - "GET /api/smoothcomp/events?q= HTTP/1.1" 404 Not Found
+INFO:     172.20.0.1:43376 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     172.20.0.1:43376 - "GET /api/events HTTP/1.1" 200 OK
+INFO:     172.20.0.1:43388 - "GET /api/smoothcomp/events?q= HTTP/1.1" 404 Not Found
+INFO:     172.20.0.1:43376 - "GET /api/smoothcomp/events?q= HTTP/1.1" 404 Not Found

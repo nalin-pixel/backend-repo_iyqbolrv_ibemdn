@@ -47,6 +47,29 @@ class ChatTranscript(BaseModel):
     response: str
     context: Optional[dict] = None
 
+# Auth schemas
+class AuthUser(BaseModel):
+    name: Optional[str] = None
+    email: EmailStr
+    role: str = Field("athlete", description="organizer | coach | athlete | admin")
+    hashed_password: str
+    is_active: bool = True
+
+class SignupRequest(BaseModel):
+    name: Optional[str] = None
+    email: EmailStr
+    password: str
+    role: Optional[str] = Field("athlete")
+
+class LoginRequest(BaseModel):
+    email: EmailStr
+    password: str
+
+class TokenResponse(BaseModel):
+    access_token: str
+    token_type: str = "bearer"
+    user: dict
+
 # Example from template retained for compatibility
 class User(BaseModel):
     name: str
